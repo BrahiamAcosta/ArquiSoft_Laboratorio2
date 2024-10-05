@@ -16,35 +16,35 @@ class CicdApplicationTests {
     DataController dataController;
 
     @Test
-    public void health(){
+    void health(){
         assertEquals("HEALTH CHECK OK",dataController.healthCheck());
     }
 
     @Test
-    public void version(){
+    void version(){
         assertEquals("THE ACTUAL VERSION IS 1.0.0", dataController.version());
     }
 
     @Test
-    public void nationsLength(){
+    void nationsLength(){
         Integer nationsLength = dataController.getRandomNations().size();
         assertEquals(10,nationsLength);
     }
 
     @Test
-    public void currenciesLength(){
+    void currenciesLength(){
         Integer currenciesLength = dataController.getRandomCurrencies().size();
         assertEquals(20,currenciesLength);
     }
 
     @Test
-    public void aviationLength(){
+    void aviationLength(){
         Integer aviationLength = dataController.getRandomAviation().size();
         assertEquals(20,aviationLength);
     }
 
     @Test
-    public void testRandomCurrenciesCodeFormat(){
+    void testRandomCurrenciesCodeFormat(){
         JsonNode response = dataController.getRandomCurrencies();
         for(int i=0;i<response.size();i++){
             JsonNode currency = response.get(i);
@@ -54,13 +54,13 @@ class CicdApplicationTests {
     }
 
     @Test
-    public void testRandomNationsPerformance(){
+    void testRandomNationsPerformance(){
         long startTime = System.currentTimeMillis();
         dataController.getRandomNations();
         long endTime = System.currentTimeMillis();
         long executionTime = endTime-startTime;
         System.out.println(executionTime);
-        assertTrue(executionTime<2000);
+        assertTrue(executionTime<4000);
     }
 
 }

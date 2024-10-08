@@ -8,8 +8,7 @@
 * Get random Aircraft
 * Get application version
 * health check
-  Including integration with GitHub Actions, Sonarqube (SonarCloud), Coveralls and
-  Snyk
+  Including integration with GitHub Actions, Sonarqube (SonarCloud), Coveralls
 ### Folders Structure
 In the folder `src` is located the main code of the app
 In the folder `test` is located the unit tests

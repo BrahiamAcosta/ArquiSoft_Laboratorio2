@@ -80,18 +80,24 @@ jobs:
     steps:
         - uses: actions/checkout@v1
 
-        - name: Use Node.js 16.x
-          uses: actions/setup-node@v3
+        - name: Set up JDK
+          uses: actions/setup-java@v1
           with:
-            node-version: 16.x
+            java-version: '11'
+        - name: Cache Maven packages
+          uses: actions/cache@v1
+          with:
+            path: ~/.m2
+            key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+            restore-keys: ${{ runner.os }}-m2
+        - name: Build and run tests with JaCoCo
+          run: mvn clean verify
 
-        - name: npm install, make test-coverage
+        - name: Upload JaCoCo coverage to Coveralls
+          env:
+            COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
           run: |
-            npm install
-            make test-coverage
-
-        - name: Coveralls
-          uses: coverallsapp/github-action@v2
+            mvn coveralls:report
   #Build's job
   build:
   #Depends on sonar's job
